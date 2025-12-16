@@ -1,7 +1,7 @@
 contexts:
   tf:
     container:
-      name: public.ecr.aws/hashicorp/terraform:1.10.5
+      name: public.ecr.aws/hashicorp/terraform:1.14.2
       entrypoint: /usr/bin/env
       container_args:
         - -v ~/.ssh:/root/.ssh
