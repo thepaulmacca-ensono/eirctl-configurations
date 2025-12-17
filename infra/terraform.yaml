@@ -81,6 +81,7 @@ tasks:
 
   tf:init:
     context: tf
+    description: Perform Terraform Init
     command:
       - terraform -chdir=${TF_DIR} init -upgrade {{ if .ArgsList }}{{ .Args }}{{ end }}
     required:
@@ -89,7 +90,8 @@ tasks:
 
   tf:plan:
     description: |
-      TF Plan runs a plan against the desired TF definition
+      Perform Terraform Plan
+
       Generates the plan in the TF_DIR under a file named `tfplan`
     context: tf
     command:
@@ -103,6 +105,10 @@ tasks:
 
   tf:apply:
     context: tf
+    description: |
+      Perform Terraform Apply
+
+      Applies the previously generated plan named `tfplan` in the TF_DIR
     command:
       - |
         terraform -chdir=${TF_DIR} workspace select -or-create ${WORKSPACE:-$ENV_NAME}
@@ -114,7 +120,7 @@ tasks:
 
   doc:terraform:generate:
     context: tf:docs
-    description: Generates Doc for a module. Must supply a TF_DIR environment variable.
+    description: Generates Documentation for a module. Must supply a TF_DIR environment variable.
     command:
       - terraform-docs --output-file README.md markdown ${TF_DIR}
     required:
