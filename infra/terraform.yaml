@@ -64,7 +64,7 @@ tasks:
       By default the utility uses `.tflint.hcl` in the current directory
     command:
         tflint --init
-        tflint -chdir=${TF_DIR}
+        tflint --chdir=${TF_DIR}
     required:
       env:
         - TF_DIR
