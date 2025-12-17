@@ -14,7 +14,7 @@ contexts:
   tf:tflint:
     container:
       name: ghcr.io/terraform-linters/tflint:v0.60.0
-      shell: sh
+      shell: /bin/sh
       shell_args:
         - -c
     envfile:
@@ -59,11 +59,15 @@ tasks:
         - TF_DIR
 
   tf:lint:tflint:
+    context: tf:tflint
     description: |
       Perform Terraform Linting using TFLint
 
       By default the utility uses `.tflint.hcl` in the current directory
-    command:  docker run --rm -v $PWD:/data -t --entrypoint /bin/sh ghcr.io/terraform-linters/tflint:v0.60.0 -c "tflint --init && tflint --chdir=/data/${TF_DIR}"
+    command:
+      - |
+        tflint --init
+        tflint --chdir=${TF_DIR}
     required:
       env:
         - TF_DIR
