@@ -83,11 +83,10 @@ tasks:
     context: tf
     description: Perform Terraform Init
     command:
-      - terraform -chdir=${TF_DIR} init -input=false ${TF_BACKEND_CONFIG} {{ if .ArgsList }}{{ .Args }}{{ end }}
+      - terraform -chdir=${TF_DIR} init -input=false -backend=false {{ if .ArgsList }}{{ .Args }}{{ end }}
     required:
       env:
         - TF_DIR
-        - TF_BACKEND_CONFIG
 
   tf:plan:
     description: |
