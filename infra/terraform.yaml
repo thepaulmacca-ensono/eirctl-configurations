@@ -5,21 +5,13 @@ tasks:
     context: eir
     description: Perform Terraform Format Check
     command:
-      - |
-        tenv tf list
-        terraform version
-
-        Invoke-Terraform -Format -Path $env:TF_FILE_LOCATION -Debug
+      - Invoke-Terraform -Format -Path $env:TF_FILE_LOCATION -Debug
 
   lint:terraform:validate:
     context: eir
     description: Perform Terraform Validation
     command:
-      - |
-        tenv tf list
-        terraform version
-
-        Invoke-Terraform -Validate -Path $env:TF_FILE_LOCATION
+      - Invoke-Terraform -Validate -Path $env:TF_FILE_LOCATION -Debug
 
   lint:terraform:tflint:
     context: eir
@@ -90,7 +82,7 @@ tasks:
     description: Get Terraform Outputs for ADO Variable Group Import
     command:
       - |
-        build/eir/Set-VariableGroupFromOutputs.ps1 `
+        build/powershell/Set-VariableGroupFromOutputs.ps1 `
           -organisationName $env:ADO_ORGANISATION `
           -projectName $env:ADO_PROJECT `
           -accessToken $env:ADO_ACCESS_TOKEN `
